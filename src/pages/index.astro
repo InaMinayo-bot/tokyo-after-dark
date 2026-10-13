@@ -1,0 +1,129 @@
+---
+import AdSlot from '../components/AdSlot.astro';
+import JsonLd from '../components/JsonLd.astro';
+import NewsletterSignup from '../components/NewsletterSignup.astro';
+import PostCard from '../components/PostCard.astro';
+import { categories, categoryIds } from '../data/taxonomy';
+import { site } from '../data/site';
+import { url } from '../lib/paths';
+import { getPosts, groupByArea } from '../lib/posts';
+import { websiteJsonLd } from '../lib/schema';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const posts = await getPosts();
+const featured = posts.filter((post) => post.data.featured).slice(0, 3);
+const featuredIds = new Set(featured.map((post) => post.id));
+const latest = posts.filter((post) => !featuredIds.has(post.id));
+const areas = groupByArea(posts);
+const counts = Object.fromEntries(
+  categoryIds.map((id) => [id, posts.filter((post) => post.data.category === id).length]),
+);
+---
+
+<BaseLayout title={site.name} description={site.description}>
+  <JsonLd data={websiteJsonLd()} />
+  <section class="hero wrap">
+    <p class="eyebrow" lang="ja">{site.nameJa}</p>
+    <h1>Tokyo<br />After Dark</h1>
+    <p class="lede">
+      English reviews of clubs, bars, concept cafes, and izakaya — plus the details that matter at the door.
+    </p>
+    <div class="hero-actions">
+      <a class="button" href="#latest">Latest reviews</a>
+      <a class="button ghost" href={url('/search/')}>Search the site</a>
+    </div>
+  </section>
+  <hr class="rule wrap" />
+
+  {
+    featured.length > 0 && (
+      <section class="section wrap" aria-labelledby="featured-heading">
+        <div class="section-head">
+          <h2 id="featured-heading">Featured</h2>
+        </div>
+        <ul class="cards">
+          {featured.map((post) => (
+            <PostCard post={post} />
+          ))}
+        </ul>
+      </section>
+    )
+  }
+
+  <section class="section wrap" id="latest" aria-labelledby="latest-heading">
+    <div class="section-head">
+      <h2 id="latest-heading">Latest</h2>
+    </div>
+    {
+      latest.length > 0 ? (
+        <ul class="cards">
+          {latest.map((post) => (
+            <PostCard post={post} />
+          ))}
+        </ul>
+      ) : (
+        posts.length === 0 && (
+          <div class="empty">
+            <p class="empty-title">The lights are coming on</p>
+            <p>Reviews of Tokyo nights will be posted here. Browse the categories below in the meantime.</p>
+          </div>
+        )
+      )
+    }
+    {posts.length > 0 && latest.length === 0 && <p class="note">Featured reviews are listed above.</p>}
+  </section>
+
+  <AdSlot placement="home" />
+
+  <section class="section wrap" aria-labelledby="browse-heading">
+    <h2 id="browse-heading">Browse</h2>
+    <ul class="browse">
+      {
+        categoryIds.map((id) => (
+          <li>
+            <a href={url(`/category/${id}/`)}>
+              <span class="ja" lang="ja">
+                {categories[id].ja}
+              </span>
+              <span>
+                <span class="en">{categories[id].label}</span>
+                {counts[id] > 0 && (
+                  <small>
+                    {' '}
+                    · {counts[id]} {counts[id] === 1 ? 'post' : 'posts'}
+                  </small>
+                )}
+              </span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section class="section wrap" aria-labelledby="areas-heading">
+    <div class="section-head">
+      <h2 id="areas-heading">Areas</h2>
+      <a href={url('/areas/')}>All areas</a>
+    </div>
+    {
+      areas.length > 0 ? (
+        <ul class="area-list">
+          {areas.map((area) => (
+            <li>
+              <a href={url(`/area/${area.slug}/`)}>
+                {area.name} <span class="count">({area.posts.length})</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p class="note">Neighborhoods show up here once a review names one.</p>
+      )
+    }
+  </section>
+
+  <div class="wrap">
+    <NewsletterSignup />
+  </div>
+</BaseLayout>

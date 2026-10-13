@@ -1,0 +1,43 @@
+---
+import { url } from '../../lib/paths';
+import { getPosts, groupByTag } from '../../lib/posts';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const tags = groupByTag(await getPosts());
+---
+
+<BaseLayout title="Tags" description="Browse Tokyo After Dark posts by tag.">
+  <header class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <ol>
+        <li>
+          <a href={url('/')}>Home</a>
+          <span aria-hidden="true"> / </span>
+        </li>
+        <li aria-current="page">Tags</li>
+      </ol>
+    </nav>
+    <h1 class="page-title">Tags</h1>
+    <p class="page-intro">Tags are free-form. Add a few to each post and the pages build themselves.</p>
+  </header>
+  <div class="wrap">
+    {
+      tags.length > 0 ? (
+        <ul class="tag-list">
+          {tags.map((tag) => (
+            <li>
+              <a href={url(`/tag/${tag.slug}/`)}>
+                {tag.name} <span class="count">({tag.posts.length})</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <div class="empty">
+          <h2>No tags yet</h2>
+          <p>Tags from published posts will be linked from here.</p>
+        </div>
+      )
+    }
+  </div>
+</BaseLayout>

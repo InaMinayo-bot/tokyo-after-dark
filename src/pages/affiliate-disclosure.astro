@@ -1,0 +1,29 @@
+---
+import { url } from '../lib/paths';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const description = 'How Tokyo After Dark will label affiliate and booking links.';
+---
+
+<BaseLayout title="Affiliate disclosure" description={description}>
+  <article class="wrap-narrow prose">
+    <h1 class="page-title">Affiliate disclosure</h1>
+    <p>Last updated 13 October 2026.</p>
+    <p>
+      Some posts may include a booking link or an affiliate link. If you use one, the editor may earn a
+      commission or a referral fee. That does not add a charge on your side.
+    </p>
+    <p>
+      A link like that is labeled on the post as an affiliate or booking link, and it uses a sponsored
+      relationship so browsers and search engines can see what it is. Reviews are not written because
+      someone paid for them. If that ever changes, this page will say so.
+    </p>
+    <p>
+      The sample posts in the project are drafts. They are not published, and their placeholder links
+      are not live recommendations.
+    </p>
+    <p>
+      Questions: see the <a href={url('/contact/')}>contact page</a>.
+    </p>
+  </article>
+</BaseLayout>

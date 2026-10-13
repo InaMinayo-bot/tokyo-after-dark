@@ -1,0 +1,20 @@
+---
+import { url } from '../lib/paths';
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Page not found"
+  description="That page is not on Tokyo After Dark."
+  noindex
+  searchable={false}
+>
+  <section class="wrap empty">
+    <h1 class="page-title">Closed for the night</h1>
+    <p>That page is not here. It may have moved, or the address may be wrong.</p>
+    <p class="button-row">
+      <a class="button" href={url('/')}>Back to the latest</a>
+      <a class="button ghost" href={url('/search/')}>Search</a>
+    </p>
+  </section>
+</BaseLayout>

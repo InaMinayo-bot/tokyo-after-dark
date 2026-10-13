@@ -1,0 +1,19 @@
+{
+  "name": "Tokyo After Dark",
+  "short_name": "After Dark",
+  "description": "English reviews of Tokyo nightlife.",
+  "lang": "en",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#09080d",
+  "theme_color": "#09080d",
+  "icons": [
+    {
+      "src": "icon-180.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

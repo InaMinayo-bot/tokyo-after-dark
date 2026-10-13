@@ -1,0 +1,47 @@
+---
+import { categories, categoryIds } from '../data/taxonomy';
+import { site } from '../data/site';
+import { url } from '../lib/paths';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer" data-pagefind-ignore="all">
+  <div class="wrap footer-grid">
+    <div>
+      <p class="footer-brand">{site.name}</p>
+      <p class="lede" style="margin-top: 0.4rem; font-size: 1rem;">{site.description}</p>
+    </div>
+    <nav aria-label="Categories">
+      <ul>
+        {
+          categoryIds.map((id) => (
+            <li>
+              <a href={url(`/category/${id}/`)}>
+                {categories[id].label} <span lang="ja">({categories[id].ja})</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+    <nav aria-label="Footer">
+      <ul>
+        <li><a href={url('/about/')}>About</a></li>
+        <li><a href={url('/contact/')}>Contact</a></li>
+        <li><a href={url('/search/')}>Search</a></li>
+        <li><a href={url('/areas/')}>Areas</a></li>
+        <li><a href={url('/tags/')}>Tags</a></li>
+        <li><a href={url('/privacy/')}>Privacy</a></li>
+        <li><a href={url('/affiliate-disclosure/')}>Affiliate disclosure</a></li>
+        <li><a href={url('/rss.xml')}>RSS</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="wrap">
+    <p class="legal">
+      <a href={`mailto:${site.email}`}>{site.email}</a>
+      {' · © '}{year} {site.name}
+    </p>
+  </div>
+</footer>

@@ -1,0 +1,15 @@
+---
+import type { PriceRange } from '../data/taxonomy';
+
+interface Props {
+  price: PriceRange;
+}
+
+const { price } = Astro.props;
+const level = [...price].length;
+---
+
+<span class="price">
+  <span aria-hidden="true">{price}</span>
+  <span class="visually-hidden">Price range {level} of 4</span>
+</span>

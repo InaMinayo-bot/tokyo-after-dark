@@ -1,0 +1,27 @@
+---
+import NewsletterSignup from '../components/NewsletterSignup.astro';
+import { site } from '../data/site';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const description = 'How to reach Tokyo After Dark.';
+---
+
+<BaseLayout title="Contact" description={description}>
+  <article class="wrap-narrow">
+    <h1 class="page-title">Contact</h1>
+    <p class="page-intro">
+      Email the editor at <a href={`mailto:${site.email}`}>{site.email}</a>. This address is a
+      placeholder until it is replaced with a real one.
+    </p>
+    <div class="note-box">
+      <h2>What to write</h2>
+      <p class="fine" style="margin-top: 0.6rem;">
+        A correction, a venue that should be looked at, or a question about a night out. The site does
+        not take reservations.
+      </p>
+    </div>
+  </article>
+  <div class="wrap">
+    <NewsletterSignup />
+  </div>
+</BaseLayout>

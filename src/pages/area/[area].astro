@@ -1,0 +1,43 @@
+---
+import PostCard from '../../components/PostCard.astro';
+import { url } from '../../lib/paths';
+import { getPosts, groupByArea } from '../../lib/posts';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const groups = groupByArea(await getPosts());
+  return groups.map((group) => ({
+    params: { area: group.slug },
+    props: { group },
+  }));
+}
+
+const { group } = Astro.props;
+const description = `English nightlife notes for ${group.name}, Tokyo.`;
+---
+
+<BaseLayout title={`${group.name} nightlife`} description={description}>
+  <header class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <ol>
+        <li>
+          <a href={url('/')}>Home</a>
+          <span aria-hidden="true"> / </span>
+        </li>
+        <li>
+          <a href={url('/areas/')}>Areas</a>
+          <span aria-hidden="true"> / </span>
+        </li>
+        <li aria-current="page">{group.name}</li>
+      </ol>
+    </nav>
+    <p class="eyebrow">Tokyo</p>
+    <h1 class="page-title">{group.name}</h1>
+    <p class="page-intro">{description}</p>
+  </header>
+  <div class="wrap">
+    <ul class="cards">
+      {group.posts.map((post) => <PostCard post={post} level={2} />)}
+    </ul>
+  </div>
+</BaseLayout>

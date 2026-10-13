@@ -1,0 +1,50 @@
+---
+import { url } from '../lib/paths';
+
+const describedBy = 'newsletter-note';
+---
+
+<section class="newsletter section" aria-labelledby="newsletter-heading" data-pagefind-ignore="all">
+  <div>
+    <h2 id="newsletter-heading">The short list</h2>
+    <p id={describedBy}>
+      New reviews, occasionally. This form is a placeholder. It does not save or send your email.
+    </p>
+  </div>
+  <form data-newsletter method="get" action={url('/newsletter/')}>
+    <div class="stack">
+      <label for="newsletter-email">Email address</label>
+      <div class="newsletter-row">
+        <input
+          id="newsletter-email"
+          type="email"
+          inputmode="email"
+          autocomplete="email"
+          required
+          placeholder="you@example.com"
+          aria-describedby={describedBy}
+        />
+        <button type="submit">Join the list</button>
+      </div>
+      <p class="form-status" role="status" hidden></p>
+    </div>
+  </form>
+</section>
+
+<script>
+  const forms = document.querySelectorAll<HTMLFormElement>('[data-newsletter]');
+
+  for (const form of forms) {
+    form.addEventListener('submit', (event) => {
+      const input = form.querySelector('input');
+      const status = form.querySelector('[role="status"]');
+      if (!(input instanceof HTMLInputElement) || !(status instanceof HTMLElement)) return;
+      if (!input.checkValidity()) return;
+
+      event.preventDefault();
+      status.hidden = false;
+      status.textContent = 'Signup is not connected yet. Your email was not saved.';
+      input.value = '';
+    });
+  }
+</script>

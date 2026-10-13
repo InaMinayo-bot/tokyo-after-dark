@@ -1,0 +1,49 @@
+---
+import { site } from '../data/site';
+import { url } from '../lib/paths';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const description = 'What Tokyo After Dark collects, and what it does not.';
+---
+
+<BaseLayout title="Privacy policy" description={description}>
+  <article class="wrap-narrow prose">
+    <h1 class="page-title">Privacy policy</h1>
+    <p>Last updated 13 October 2026.</p>
+    <p>
+      Tokyo After Dark is a static website. It is hosted on GitHub Pages. There is no account system
+      and no comment box.
+    </p>
+    <h2>What this site does not do</h2>
+    <ul>
+      <li>It does not run analytics.</li>
+      <li>It does not set its own advertising or tracking cookies. Ads are not switched on.</li>
+      <li>
+        The newsletter form is a placeholder. It does not send your address to an email service, and
+        this site does not store it. With JavaScript on, the form stops before anything is submitted.
+        With JavaScript off, the form opens a confirmation page and the address is not included,
+        because the email field has no name that would put it in the page address.
+      </li>
+    </ul>
+    <h2>Email</h2>
+    <p>
+      If you write to <a href={`mailto:${site.email}`}>{site.email}</a>, that message is ordinary email
+      between you and the editor. The address on this page is a placeholder until it is replaced.
+    </p>
+    <h2>Links to other sites</h2>
+    <p>
+      Posts may link to Google Maps, and later to a booking or affiliate site. Those sites have their
+      own policies. See the <a href={url('/affiliate-disclosure/')}>affiliate disclosure</a> before using
+      a labeled booking link.
+    </p>
+    <h2>Pages and the host</h2>
+    <p>
+      GitHub Pages serves the files. GitHub may keep standard server logs for the host. This site does
+      not add a tracker on top of that.
+    </p>
+    <h2>Corrections</h2>
+    <p>
+      If a published note is wrong, or you want a personal detail removed, email the address above.
+    </p>
+  </article>
+</BaseLayout>
