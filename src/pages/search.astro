@@ -1,0 +1,93 @@
+---
+import { categories, categoryIds } from '../data/taxonomy';
+import { url } from '../lib/paths';
+import { getPosts } from '../lib/posts';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const posts = await getPosts();
+const description = 'Search Tokyo After Dark reviews, guides, and practical notes.';
+const pagefindBase = import.meta.env.BASE_URL;
+---
+
+<BaseLayout title="Search" description={description} searchAssets={import.meta.env.PROD} searchable={false}>
+  <header class="wrap">
+    <h1 class="page-title">Search</h1>
+    <p class="page-intro">
+      Look through reviews, areas, and guides. Search runs in your browser. Nothing you type is sent to a server.
+    </p>
+  </header>
+  <div class="wrap">
+    <noscript>
+      <p class="note-box">
+        Search needs JavaScript. You can still browse{' '}
+        {categoryIds.map((id, index) => (
+          <>
+            {index > 0 && ', '}
+            <a href={url(`/category/${id}/`)}>{categories[id].label}</a>
+          </>
+        ))}
+        .
+      </p>
+    </noscript>
+
+    <pagefind-config
+      base-url={pagefindBase}
+      bundle-path={`${pagefindBase}pagefind/`}
+      excerpt-length="28"
+      faceted
+      preload
+    />
+    <pagefind-input placeholder="Try a neighborhood, a tag, or a phrase"></pagefind-input>
+    <div class="search-layout">
+      <pagefind-filter-pane open="category,area,tag"></pagefind-filter-pane>
+      <div>
+        <pagefind-summary></pagefind-summary>
+        <pagefind-results></pagefind-results>
+      </div>
+    </div>
+
+    {
+      import.meta.env.DEV && (
+        <div class="note-box" style="margin-top: 1.5rem;">
+          <h2>Local preview list</h2>
+          <p class="fine" style="margin: 0.6rem 0 1rem;">
+            The full-text index is created by the production build. This box filters the posts loaded in
+            local preview, including drafts. Run <code>npm run build</code> and then <code>npm run preview</code> to
+            try Pagefind.
+          </p>
+          <label for="dev-filter">Filter local posts</label>
+          <input id="dev-filter" type="search" placeholder="Filter by title, area, or tag" style="margin-top: 0.5rem;" />
+          <ul class="tag-list" id="dev-results" style="margin-top: 1rem;">
+            {posts.map((post) => (
+              <li data-text={`${post.data.title} ${post.data.description} ${post.data.area ?? ''} ${post.data.tags.join(' ')} ${post.data.category}`.toLowerCase()}>
+                <a href={url(`/posts/${post.id}/`)}>{post.data.title}</a>
+              </li>
+            ))}
+          </ul>
+          <p id="dev-empty" class="fine" hidden>
+            No local posts match.
+          </p>
+        </div>
+      )
+    }
+  </div>
+</BaseLayout>
+
+<script>
+  const input = document.querySelector('#dev-filter');
+  if (input instanceof HTMLInputElement) {
+    const items = [...document.querySelectorAll<HTMLElement>('#dev-results li')];
+    const empty = document.querySelector('#dev-empty');
+    input.addEventListener('input', () => {
+      const query = input.value.trim().toLowerCase();
+      let shown = 0;
+      for (const item of items) {
+        const text = item.dataset.text ?? '';
+        const match = query.length === 0 || text.includes(query);
+        item.hidden = !match;
+        if (match) shown += 1;
+      }
+      if (empty instanceof HTMLElement) empty.hidden = shown !== 0;
+    });
+  }
+</script>

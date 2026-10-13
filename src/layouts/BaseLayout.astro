@@ -1,0 +1,65 @@
+---
+import '../styles/global.css';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { site } from '../data/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  imageAlt?: string;
+  type?: 'website' | 'article';
+  noindex?: boolean;
+  published?: Date;
+  modified?: Date;
+  tags?: string[];
+  searchAssets?: boolean;
+  searchable?: boolean;
+}
+
+const {
+  title = site.name,
+  description = site.description,
+  image,
+  imageAlt,
+  type = 'website',
+  noindex = false,
+  published,
+  modified,
+  tags = [],
+  searchAssets = false,
+  searchable = true,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang={site.lang}>
+  <head>
+    <BaseHead
+      title={title}
+      description={description}
+      image={image}
+      imageAlt={imageAlt}
+      type={type}
+      noindex={noindex}
+      published={published}
+      modified={modified}
+      tags={tags}
+      searchAssets={searchAssets}
+    />
+  </head>
+  <body>
+    <Header />
+    <main
+      id="main"
+      tabindex="-1"
+      data-pagefind-body={searchable ? true : undefined}
+      data-pagefind-ignore={searchable ? undefined : 'all'}
+    >
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

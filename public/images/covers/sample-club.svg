@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img">
+  <rect width="1600" height="1000" fill="#09080d"/>
+  <circle cx="240" cy="180" r="280" fill="#ff4fd8" opacity="0.45"/>
+  <circle cx="1320" cy="860" r="340" fill="#9af7f0" opacity="0.16"/>
+  <rect x="80" y="80" width="1440" height="840" fill="none" stroke="#f7f2ea" stroke-opacity="0.25"/>
+  <text x="120" y="220" fill="#ff4fd8" font-family="Arial, Helvetica, sans-serif" font-size="34" letter-spacing="10">FICTIONAL SAMPLE</text>
+  <text x="120" y="520" fill="#f7f2ea" font-family="Arial, Helvetica, sans-serif" font-size="168" font-weight="700">SAMPLE</text>
+  <text x="120" y="640" fill="#d5cce2" font-family="Arial, Helvetica, sans-serif" font-size="48">Not a real club</text>
+  <text x="120" y="820" fill="#9af7f0" font-family="Arial, Helvetica, sans-serif" font-size="28" letter-spacing="6">TEMPLATE GRAPHIC · NOT A PHOTOGRAPH</text>
+</svg>

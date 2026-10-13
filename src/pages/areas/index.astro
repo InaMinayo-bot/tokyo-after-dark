@@ -1,0 +1,46 @@
+---
+import { url } from '../../lib/paths';
+import { getPosts, groupByArea } from '../../lib/posts';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const areas = groupByArea(await getPosts());
+---
+
+<BaseLayout title="Areas" description="Nightlife notes by Tokyo neighborhood.">
+  <header class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <ol>
+        <li>
+          <a href={url('/')}>Home</a>
+          <span aria-hidden="true"> / </span>
+        </li>
+        <li aria-current="page">Areas</li>
+      </ol>
+    </nav>
+    <h1 class="page-title">Areas</h1>
+    <p class="page-intro">
+      Shibuya, Shinjuku, Roppongi, Ginza, Akihabara, Ikebukuro, and wherever the next night lands.
+      A neighborhood appears here when a published post names it.
+    </p>
+  </header>
+  <div class="wrap">
+    {
+      areas.length > 0 ? (
+        <ul class="area-list">
+          {areas.map((area) => (
+            <li>
+              <a href={url(`/area/${area.slug}/`)}>
+                {area.name} <span class="count">({area.posts.length})</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <div class="empty">
+          <h2>No neighborhoods yet</h2>
+          <p>Add an area to a post, such as Shibuya or Shinjuku, and it will be listed here.</p>
+        </div>
+      )
+    }
+  </div>
+</BaseLayout>

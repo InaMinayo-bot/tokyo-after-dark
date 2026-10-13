@@ -1,0 +1,32 @@
+---
+import { url } from '../lib/paths';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const description = 'An independent English guide to going out in Tokyo.';
+---
+
+<BaseLayout title="About" description={description}>
+  <article class="wrap-narrow prose">
+    <h1 class="page-title">About</h1>
+    <p>
+      Tokyo After Dark is an independent guide, in English, to going out in this city: clubs, bars,
+      concept cafes (<span lang="ja">コンカフェ</span>), izakaya, and the odd note that does not fit a single room.
+    </p>
+    <p>
+      Each venue write-up is meant to include the details that are easy to miss if you are not reading
+      Japanese fluently. That means whether there is an English menu, what the cover charge is, what to
+      wear, and whether the door will ask for ID.
+    </p>
+    <p>
+      The notes come from nights out, not from press releases. This page is a starting point — replace
+      it with the editor’s own story when you are ready. It does not invent a biography.
+    </p>
+    <p>
+      Nothing here is a paid placement. If a booking or affiliate link is added later, it is labeled on
+      the post and explained on the <a href={url('/affiliate-disclosure/')}>affiliate disclosure</a> page.
+    </p>
+    <p>
+      Questions and corrections: <a href={url('/contact/')}>contact</a>.
+    </p>
+  </article>
+</BaseLayout>

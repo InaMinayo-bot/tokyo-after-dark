@@ -1,0 +1,48 @@
+---
+import { categories, categoryIds } from '../data/taxonomy';
+import { site } from '../data/site';
+import { currentPath, url } from '../lib/paths';
+
+const path = currentPath(Astro.url.pathname);
+
+const links = [
+  { href: url('/'), label: 'Home', path: '/' },
+  ...categoryIds.map((id) => ({
+    href: url(`/category/${id}/`),
+    label: categories[id].label,
+    path: `/category/${id}/`,
+  })),
+  { href: url('/areas/'), label: 'Areas', path: '/areas/' },
+  { href: url('/about/'), label: 'About', path: '/about/' },
+];
+
+function isCurrent(linkPath: string) {
+  if (linkPath === '/') return path === '/';
+  return path === linkPath || path.startsWith(linkPath);
+}
+---
+
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header" data-pagefind-ignore="all">
+  <div class="wrap header-bar">
+    <a class="logo" href={url('/')}>
+      {site.name.split(' ')[0]} <span>After Dark</span>
+    </a>
+    <a class="button ghost" href={url('/search/')} aria-current={path === '/search/' ? 'page' : undefined}>Search</a>
+  </div>
+  <nav class="nav-scroll" aria-label="Primary">
+    <div class="wrap">
+      <ul class="nav-list">
+        {
+          links.map((link) => (
+            <li>
+              <a href={link.href} aria-current={isCurrent(link.path) ? 'page' : undefined}>
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </nav>
+</header>

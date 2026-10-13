@@ -1,0 +1,58 @@
+---
+import PostCard from '../../components/PostCard.astro';
+import { categories, categoryIds, isCategory } from '../../data/taxonomy';
+import { url } from '../../lib/paths';
+import { getPosts } from '../../lib/posts';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const posts = await getPosts();
+  return categoryIds.map((category) => ({
+    params: { category },
+    props: {
+      category,
+      posts: posts.filter((post) => post.data.category === category),
+    },
+  }));
+}
+
+const { category } = Astro.props;
+if (!isCategory(category)) {
+  throw new Error(`Unknown category: ${category}`);
+}
+const info = categories[category];
+const posts = Astro.props.posts;
+---
+
+<BaseLayout title={info.label} description={info.blurb}>
+  <header class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <ol>
+        <li>
+          <a href={url('/')}>Home</a>
+          <span aria-hidden="true"> / </span>
+        </li>
+        <li aria-current="page">{info.label}</li>
+      </ol>
+    </nav>
+    <p class="eyebrow" lang="ja">{info.ja}</p>
+    <h1 class="page-title">{info.label}</h1>
+    <p class="page-intro">{info.blurb}</p>
+  </header>
+  <div class="wrap">
+    {
+      posts.length > 0 ? (
+        <ul class="cards">
+          {posts.map((post) => (
+            <PostCard post={post} level={2} />
+          ))}
+        </ul>
+      ) : (
+        <div class="empty">
+          <h2>Nothing filed here yet</h2>
+          <p>Published {info.label.toLowerCase()} notes will show up in this list.</p>
+        </div>
+      )
+    }
+  </div>
+</BaseLayout>

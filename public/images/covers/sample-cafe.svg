@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img">
+  <rect width="1600" height="1000" fill="#100e16"/>
+  <circle cx="1180" cy="260" r="300" fill="#ffd27a" opacity="0.28"/>
+  <circle cx="260" cy="780" r="260" fill="#ff4fd8" opacity="0.3"/>
+  <path d="M80 780 C 280 620, 520 900, 760 700 S 1240 560, 1520 760" fill="none" stroke="#9af7f0" stroke-width="8"/>
+  <text x="120" y="240" fill="#ffd27a" font-family="Arial, Helvetica, sans-serif" font-size="34" letter-spacing="10">FICTIONAL SAMPLE</text>
+  <text x="120" y="500" fill="#f7f2ea" font-family="Arial, Helvetica, sans-serif" font-size="150" font-weight="700">SAMPLE</text>
+  <text x="120" y="620" fill="#d5cce2" font-family="Arial, Helvetica, sans-serif" font-size="48">Not a real concept cafe</text>
+  <text x="120" y="840" fill="#ff4fd8" font-family="Arial, Helvetica, sans-serif" font-size="28" letter-spacing="6">TEMPLATE GRAPHIC · NOT A PHOTOGRAPH</text>
+</svg>

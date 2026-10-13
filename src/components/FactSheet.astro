@@ -1,0 +1,110 @@
+---
+import { url } from '../lib/paths';
+
+interface Friendly {
+  englishMenu?: boolean;
+  coverCharge?: string;
+  dressCode?: string;
+  idRequired?: boolean;
+  notes?: string;
+}
+
+interface Props {
+  notes: Friendly | undefined;
+  address?: string;
+  hours?: string;
+  maps?: string;
+  affiliate?: string;
+  affiliateLabel?: string;
+}
+
+const { notes, address, hours, maps, affiliate, affiliateLabel } = Astro.props;
+
+function yesNo(value: boolean | undefined, yes = 'Yes', no = 'No') {
+  if (value === true) return yes;
+  if (value === false) return no;
+  return 'Not noted';
+}
+
+const hasFacts = Boolean(notes || address || hours || maps || affiliate);
+---
+
+{
+  hasFacts && (
+    <div class="facts">
+      {(address || hours || maps) && (
+        <section class="fact" aria-labelledby="visit-heading">
+          <h2 id="visit-heading">Visit</h2>
+          <dl>
+            {address && (
+              <div>
+                <dt>Address</dt>
+                <dd>
+                  <address>{address}</address>
+                </dd>
+              </div>
+            )}
+            {hours && (
+              <div>
+                <dt>Hours</dt>
+                <dd>{hours}</dd>
+              </div>
+            )}
+            {maps && (
+              <div>
+                <dt>Map</dt>
+                <dd>
+                  <a href={maps} rel="noopener noreferrer" target="_blank">
+                    Open in Google Maps
+                    <span class="visually-hidden"> (opens in a new tab)</span>
+                  </a>
+                </dd>
+              </div>
+            )}
+          </dl>
+        </section>
+      )}
+
+      {notes && (
+        <section class="fact" aria-labelledby="door-heading">
+          <h2 id="door-heading">Before you go</h2>
+          <dl>
+            <div>
+              <dt>English menu</dt>
+              <dd>{yesNo(notes.englishMenu)}</dd>
+            </div>
+            <div>
+              <dt>Cover charge</dt>
+              <dd>{notes.coverCharge || 'Not noted'}</dd>
+            </div>
+            <div>
+              <dt>Dress code</dt>
+              <dd>{notes.dressCode || 'Not noted'}</dd>
+            </div>
+            <div>
+              <dt>ID</dt>
+              <dd>{yesNo(notes.idRequired, 'Required', 'Not required')}</dd>
+            </div>
+          </dl>
+          {notes.notes && <p class="fine" style="margin-top: 0.9rem;">{notes.notes}</p>}
+        </section>
+      )}
+
+      {affiliate && (
+        <section class="fact" aria-labelledby="book-heading">
+          <h2 id="book-heading">Booking</h2>
+          <p class="button-row">
+            <a class="button" href={affiliate} rel="sponsored noopener noreferrer" target="_blank">
+              {affiliateLabel ?? 'Check availability'}
+              <span class="visually-hidden"> (opens in a new tab)</span>
+            </a>
+          </p>
+          <p class="fine">
+            Affiliate or booking link.{' '}
+            <a href={url('/affiliate-disclosure/')}>Read the disclosure</a>.
+          </p>
+        </section>
+      )}
+    </div>
+  )
+}

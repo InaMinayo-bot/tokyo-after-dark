@@ -1,0 +1,154 @@
+---
+import { render } from 'astro:content';
+import AdSlot from '../components/AdSlot.astro';
+import FactSheet from '../components/FactSheet.astro';
+import JsonLd from '../components/JsonLd.astro';
+import NewsletterSignup from '../components/NewsletterSignup.astro';
+import PostCard from '../components/PostCard.astro';
+import Price from '../components/Price.astro';
+import Rating from '../components/Rating.astro';
+import { categories } from '../data/taxonomy';
+import { absoluteUrl, formatDate, isoDate, slugify, socialImage, url } from '../lib/paths';
+import { getPosts, relatedPosts, type Post } from '../lib/posts';
+import { postJsonLd } from '../lib/schema';
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  post: Post;
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const data = post.data;
+const category = categories[data.category];
+const pageUrl = absoluteUrl(`/posts/${post.id}/`);
+const image = socialImage(data.cover);
+const schema = postJsonLd(post, pageUrl, image);
+const posts = await getPosts();
+const related = relatedPosts(posts, post);
+const cover = data.cover ? url(data.cover) : undefined;
+---
+
+<BaseLayout
+  title={data.title}
+  description={data.description}
+  image={image}
+  imageAlt={data.coverAlt ?? data.description}
+  type="article"
+  noindex={data.draft}
+  published={data.date}
+  modified={data.updated}
+  tags={data.tags}
+>
+  <JsonLd data={schema} />
+  <article class="post">
+    <header class="post-header wrap-narrow">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <ol>
+          <li>
+            <a href={url('/')}>Home</a>
+            <span aria-hidden="true"> / </span>
+          </li>
+          <li>
+            <a href={url(`/category/${data.category}/`)}>{category.label}</a>
+            <span aria-hidden="true"> / </span>
+          </li>
+          <li aria-current="page">{data.title}</li>
+        </ol>
+      </nav>
+      {
+        data.draft && (
+          <p class="banner" role="note">
+            Sample draft. This is not a real review. It is left out of the live site while draft is true.
+          </p>
+        )
+      }
+      <p class="kicker">
+        <span>{category.label}</span>
+        <span lang="ja">{category.ja}</span>
+        {data.area && <span>{data.area}</span>}
+      </p>
+      <h1>{data.title}</h1>
+      {data.venue && <p class="venue">{data.venue}</p>}
+      <p class="card-meta">
+        <time datetime={isoDate(data.date)}>Published {formatDate(data.date)}</time>
+        {
+          data.updated && (
+            <time datetime={isoDate(data.updated)}>Updated {formatDate(data.updated)}</time>
+          )
+        }
+        {data.rating != null && <Rating rating={data.rating} />}
+        {data.price && <Price price={data.price} />}
+      </p>
+      <span data-pagefind-filter={`category:${category.label}`}></span>
+      {data.area && <span data-pagefind-filter={`area:${data.area}`}></span>}
+      {data.tags.map((tag) => <span data-pagefind-filter={`tag:${tag}`} />)}
+    </header>
+
+    {
+      cover && (
+        <figure class="cover post-cover wrap">
+          <img
+            src={cover}
+            alt={data.coverAlt ?? ''}
+            width="1600"
+            height="1000"
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
+          />
+        </figure>
+      )
+    }
+
+    <div class="post-grid wrap">
+      <div class="post-facts">
+        <FactSheet
+          notes={data.foreignerFriendly}
+          address={data.address}
+          hours={data.hours}
+          maps={data.maps}
+          affiliate={data.affiliate}
+          affiliateLabel={data.affiliateLabel}
+        />
+      </div>
+      <div class="post-body">
+        <div class="prose">
+          <Content />
+        </div>
+        {
+          data.tags.length > 0 && (
+            <section class="section" aria-labelledby="tags-heading">
+              <h2 id="tags-heading">Tags</h2>
+              <ul class="tag-list">
+                {data.tags.map((tag) => (
+                  <li>
+                    <a href={url(`/tag/${slugify(tag)}/`)}>{tag}</a>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )
+        }
+        <AdSlot placement="post" />
+      </div>
+    </div>
+
+    {
+      related.length > 0 && (
+        <section class="section wrap" aria-labelledby="related-heading">
+          <h2 id="related-heading">More in this direction</h2>
+          <ul class="cards">
+            {related.map((item) => (
+              <PostCard post={item} />
+            ))}
+          </ul>
+        </section>
+      )
+    }
+
+    <div class="wrap">
+      <NewsletterSignup />
+    </div>
+  </article>
+</BaseLayout>

@@ -1,0 +1,61 @@
+---
+import type { Post } from '../lib/posts';
+import { categories } from '../data/taxonomy';
+import { formatDate, isoDate, url } from '../lib/paths';
+import Price from './Price.astro';
+import Rating from './Rating.astro';
+
+interface Props {
+  post: Post;
+  level?: 2 | 3;
+}
+
+const { post, level = 3 } = Astro.props;
+const data = post.data;
+const category = categories[data.category];
+const href = url(`/posts/${post.id}/`);
+const cover = data.cover ? url(data.cover) : undefined;
+const headingId = `card-title-${post.id}`;
+---
+
+<li class="card">
+  <div class="cover">
+    {
+      cover ? (
+        <img src={cover} alt={data.coverAlt ?? ''} width="1600" height="1000" loading="lazy" decoding="async" />
+      ) : (
+        <span class="cover-fallback" aria-hidden="true">
+          {category.label}
+        </span>
+      )
+    }
+  </div>
+  <div class="card-body">
+    <p class="kicker">
+      {data.draft && <span class="pill">Sample draft</span>}
+      <span>{category.label}</span>
+      {data.area && <span>{data.area}</span>}
+    </p>
+    {
+      level === 2 ? (
+        <h2 id={headingId}>
+          <a class="card-title" href={href}>
+            {data.title}
+          </a>
+        </h2>
+      ) : (
+        <h3 id={headingId}>
+          <a class="card-title" href={href}>
+            {data.title}
+          </a>
+        </h3>
+      )
+    }
+    <p class="excerpt">{data.description}</p>
+    <p class="card-meta">
+      <time datetime={isoDate(data.date)}>{formatDate(data.date)}</time>
+      {data.rating != null && <Rating rating={data.rating} />}
+      {data.price && <Price price={data.price} />}
+    </p>
+  </div>
+</li>
