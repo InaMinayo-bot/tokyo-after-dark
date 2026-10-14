@@ -7,8 +7,11 @@ title: "Name the night in a few words"
 description: "One or two sentences. This shows on the homepage, in search, and when the link is shared."
 date: 2026-10-13
 featured: false
-# clubs, bars, concafes, izakaya, or guides
+# clubs, bars, concafes, izakaya, hostess-clubs, or guides
 category: bars
+# Guides only. Delete this line for a venue review.
+# One of: area, first-timers, budget, etiquette, scams-safety, themed-nights, seasonal, late-night-food, last-train, lgbtq, solo, date-night
+# guideType: etiquette
 # Neighborhood. Required for venues. Optional for a citywide guide.
 area: Shibuya
 # Optional. Use this when the headline is not the venue's name.
