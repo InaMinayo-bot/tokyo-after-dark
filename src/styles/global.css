@@ -943,7 +943,7 @@ textarea {
     grid-template-columns: repeat(3, 1fr);
   }
 
-  .post-grid {
+  .post-grid.has-facts {
     grid-template-columns: minmax(0, 1fr) 18.5rem;
     align-items: start;
   }
