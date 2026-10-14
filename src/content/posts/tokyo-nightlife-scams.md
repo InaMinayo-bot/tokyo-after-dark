@@ -19,13 +19,11 @@ The areas named most often are Kabukicho in Shinjuku, Roppongi, Shibuya, and Ike
 
 ## You do not need anyone to take you there
 
-A hostess club or cabaret that entertains people over drinks is a regulated business. Under the Act on Control and Improvement of Amusement Business (風営法, often called the Fueiho), that kind of hospitality — 接待, entertaining a guest in a way that creates a party atmosphere — is “food-and-drink entertainment” (接待飲食等営業). A business in that category needs a permit from the prefectural public safety commission for each premises. Walking into a permitted club is not a crime.
+Licensed adult entertainment shops (風俗, fuuzoku) are legal, licensed businesses in Japan. They are regulated under the 風営法, the Act on Control and Improvement of Amusement Business. Going to one is not a crime.
 
-Prostitution is a different matter. The Anti-Prostitution Act defines it as sexual intercourse with an unspecified partner for payment or a promise of payment. Article 3 says no one shall do that, and no one shall be the other party to it. The Tokyo Metropolitan Police tell visitors that buying sex is illegal, and their leaflet says “do not be a customer.” Soliciting on the street for paid sex is also illegal. This note does not treat paying for sex as legal.
+If you are overcharged, threatened, or drugged, you are the victim. Report it without worrying. Call 110, or walk into the nearest police box (交番, a koban).
 
-The Act’s criminal penalties are aimed at solicitation, brokering, deception, threats, and providing a place. If you are overcharged, threatened, drugged, or blackmailed, that is a separate wrong against you. The police ask visitors not to hesitate to call 110, and a police box (交番, a koban) will take a report. Being inside a permitted bar does not stop you from reporting those crimes.
-
-Sex-related businesses are regulated under the same amusement-business law, in a separate chapter from ordinary hostess clubs. Some shops in entertainment districts are not permitted at all. Police warnings mention illegal gambling rooms and shops that do not do what they promised. You do not need a stranger on the pavement to find a bar that is allowed to be open. Look the place up yourself, read recent accounts, ask the hotel desk or someone who lives in the city, and read the prices before you sit down.
+Licensed shops operate openly, so you never need to follow a tout. Look the place up yourself, read recent accounts, ask the hotel desk or someone who lives in the city, and check the prices before you sit down. Police warnings also mention illegal gambling rooms, and shops that do not do what a tout promised.
 
 ## Street touts
 
@@ -103,14 +101,12 @@ The Metropolitan Police describe two versions. On the street, someone — someti
 
 Last checked: 14 October 2026. Pages change. If a number or a boundary in this note matters to you, open the official page before you rely on it.
 
-- Tokyo Metropolitan Police, “For Visitors to Tokyo,” updated 22 May 2026. 110, #9110, koban, street touts and rip-offs, passport rules, and the note that buying sex is illegal. <https://www.keishicho.metro.tokyo.lg.jp/multilingual/english/safe_society/victim_of_crime/ninpo.html>
-- Tokyo Metropolitan Police leaflet, “Buying sex is illegal.” <https://www.keishicho.metro.tokyo.lg.jp/multilingual/english/safe_society/victim_of_crime/ninpo.files/English_Tsutsumotase.pdf>
+- Tokyo Metropolitan Police, “For Visitors to Tokyo,” updated 22 May 2026. 110, #9110, koban, street touts and rip-offs, and passport rules. <https://www.keishicho.metro.tokyo.lg.jp/multilingual/english/safe_society/victim_of_crime/ninpo.html>
 - Tokyo Metropolitan Police, “Crime prevention tips in entertainment and nightlife districts,” updated 13 February 2026. District notes, dating-app rip-offs, spiked drinks, and card fraud. <https://www.keishicho.metro.tokyo.lg.jp/multilingual/english/safe_society/victim_of_crime/sakariba_topics.html>
 - Tokyo Metropolitan Police, “Crimes against foreigners in entertainment and nightlife districts,” updated 1 April 2022. <https://www.keishicho.metro.tokyo.lg.jp/multilingual/english/safe_society/victim_of_crime/hankagai.html>
 - Tokyo Metropolitan Police, “主な要因” page on entertainment districts, on malicious touting and the “sister shop” lie. <https://www.keishicho.metro.tokyo.lg.jp/kurashi/anzen/sakaribasogo/sakariba2.html>
 - Tokyo ordinance against public nuisance, Articles 7 and 8. <https://www.reiki.metro.tokyo.lg.jp/reiki/reiki_honbun/g101RG00002212.html>
 - Act on Control and Improvement of Amusement Business (風営法), Articles 2 and 3. <https://laws.e-gov.go.jp/law/323AC0000000122>
-- Anti-Prostitution Act, Articles 2 and 3 and Chapter 2. <https://laws.e-gov.go.jp/law/331AC0000000118>
 - US State Department, Japan travel advisory, crime section, including nightlife districts and police reports. <https://travel.state.gov/en/international-travel/travel-advisories/japan.html>
 - US Embassy and Consulates in Japan, information for US citizens, nightlife section. <https://jp.usembassy.gov/services/welcomebacktojapan/>
 - UK Foreign, Commonwealth & Development Office, “Safety and security — Japan travel advice.” Still current on 14 October 2026; the page’s latest listed update was 28 August 2026. <https://www.gov.uk/foreign-travel-advice/japan/safety-and-security>
