@@ -8,9 +8,10 @@ import Rating from './Rating.astro';
 interface Props {
   post: Post;
   level?: 2 | 3;
+  startHere?: boolean;
 }
 
-const { post, level = 3 } = Astro.props;
+const { post, level = 3, startHere = false } = Astro.props;
 const data = post.data;
 const category = categories[data.category];
 const href = url(`/posts/${post.id}/`);
@@ -32,6 +33,7 @@ const headingId = `card-title-${post.id}`;
   </div>
   <div class="card-body">
     <p class="kicker">
+      {startHere && <span class="pill">Start here</span>}
       {data.draft && <span class="pill">Sample draft</span>}
       <span>{category.label}</span>
       {data.guideType && <span>{guideTypes[data.guideType]}</span>}

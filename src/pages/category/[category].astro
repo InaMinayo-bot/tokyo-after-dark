@@ -11,7 +11,11 @@ export async function getStaticPaths() {
     params: { category },
     props: {
       category,
-      posts: posts.filter((post) => post.data.category === category),
+      posts: posts.filter((post) =>
+        category === 'guides'
+          ? post.data.category === 'guides' || post.data.guideType != null
+          : post.data.category === category,
+      ),
     },
   }));
 }
@@ -23,6 +27,9 @@ if (!isCategory(category)) {
 const info = categories[category];
 const posts = Astro.props.posts;
 const isGuides = category === 'guides';
+const pinned = posts.filter((post) => post.data.pinned && post.data.category === category);
+const pinnedIds = new Set(pinned.map((post) => post.id));
+const rest = posts.filter((post) => !pinnedIds.has(post.id));
 ---
 
 <BaseLayout title={info.label} description={info.blurb}>
@@ -45,6 +52,18 @@ const isGuides = category === 'guides';
   </header>
   <div class="wrap">
     {
+      pinned.length > 0 && (
+        <section class="start-here" aria-labelledby="start-here-label">
+          <p id="start-here-label" class="filter-label">Start here</p>
+          <ul class="cards">
+            {pinned.map((post) => (
+              <PostCard post={post} level={2} startHere />
+            ))}
+          </ul>
+        </section>
+      )
+    }
+    {
       isGuides && (
         <div class="filters" data-guide-filters>
           <p id="guide-filter-label" class="filter-label">Guide type</p>
@@ -63,18 +82,18 @@ const isGuides = category === 'guides';
       )
     }
     {
-      posts.length > 0 ? (
+      rest.length > 0 ? (
         <ul class="cards" data-guide-list>
-          {posts.map((post) => (
+          {rest.map((post) => (
             <PostCard post={post} level={2} />
           ))}
         </ul>
-      ) : (
+      ) : posts.length === 0 ? (
         <div class="empty" data-guide-generic-empty>
           <h2>Nothing filed here yet</h2>
           <p>Published {info.label.toLowerCase()} notes will show up in this list.</p>
         </div>
-      )
+      ) : null
     }
     {
       isGuides && (
