@@ -58,9 +58,9 @@ The production build leaves out anything with `draft: true`.
 | `guideType` | Guides only. One of `area`, `first-timers`, `budget`, `etiquette`, `scams-safety`, `themed-nights`, `seasonal`, `late-night-food`, `last-train`, `lgbtq`, `solo`, `date-night`. Leave it out for a venue review. |
 | `area` | Neighborhood, such as Shibuya, Shinjuku, Roppongi, Ginza, Akihabara, or Ikebukuro. Required for venues. Optional for a citywide guide. New names get their own page. |
 | `venue` | Optional. The place name, when the headline is not already the name. |
-| `rating` | A whole number from 1 to 5. Required for venues. Leave it out for guides. |
-| `price` | `"¥"`, `"¥¥"`, `"¥¥¥"`, or `"¥¥¥¥"`. Keep the quotes. Required for venues. |
-| `address` | Street address. Required for venues. |
+| `rating` | A whole number from 1 to 5. Required before a venue review is published. A draft can leave it out. Leave it out for guides. |
+| `price` | `"¥"`, `"¥¥"`, `"¥¥¥"`, or `"¥¥¥¥"`. Keep the quotes. Required before a venue review is published. A draft can leave it out. |
+| `address` | Street address. Required before a venue review is published. A draft can leave it out. |
 | `maps` | The venue’s Google Maps link. Optional, but worth adding. |
 | `hours` | When it is open, in your own words. |
 | `cover` | Path such as `/images/covers/photo.jpg`. |

@@ -63,13 +63,6 @@ const posts = defineCollection({
       }
 
       if (data.category !== 'guides') {
-        if (data.rating == null) {
-          ctx.addIssue({
-            code: 'custom',
-            message: 'Venue reviews need a rating from 1 to 5. Guides can leave it out.',
-            path: ['rating'],
-          });
-        }
         if (!data.area) {
           ctx.addIssue({
             code: 'custom',
@@ -77,19 +70,29 @@ const posts = defineCollection({
             path: ['area'],
           });
         }
-        if (!data.price) {
-          ctx.addIssue({
-            code: 'custom',
-            message: 'Venue reviews need a price range: ¥, ¥¥, ¥¥¥, or ¥¥¥¥.',
-            path: ['price'],
-          });
-        }
-        if (!data.address) {
-          ctx.addIssue({
-            code: 'custom',
-            message: 'Venue reviews need an address.',
-            path: ['address'],
-          });
+        // Draft skeletons name the place and the area only. Fill these in before publishing.
+        if (!data.draft) {
+          if (data.rating == null) {
+            ctx.addIssue({
+              code: 'custom',
+              message: 'Published venue reviews need a rating from 1 to 5. Drafts can leave it out.',
+              path: ['rating'],
+            });
+          }
+          if (!data.price) {
+            ctx.addIssue({
+              code: 'custom',
+              message: 'Published venue reviews need a price range: ¥, ¥¥, ¥¥¥, or ¥¥¥¥. Drafts can leave it out.',
+              path: ['price'],
+            });
+          }
+          if (!data.address) {
+            ctx.addIssue({
+              code: 'custom',
+              message: 'Published venue reviews need an address. Drafts can leave it out.',
+              path: ['address'],
+            });
+          }
         }
       }
 
