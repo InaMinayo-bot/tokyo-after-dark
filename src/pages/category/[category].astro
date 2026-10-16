@@ -1,6 +1,6 @@
 ---
 import PostCard from '../../components/PostCard.astro';
-import { categories, categoryIds, isCategory } from '../../data/taxonomy';
+import { categories, categoryIds, guideTypeIds, guideTypes, isCategory } from '../../data/taxonomy';
 import { url } from '../../lib/paths';
 import { getPosts } from '../../lib/posts';
 import BaseLayout from '../../layouts/BaseLayout.astro';
@@ -22,6 +22,7 @@ if (!isCategory(category)) {
 }
 const info = categories[category];
 const posts = Astro.props.posts;
+const isGuides = category === 'guides';
 ---
 
 <BaseLayout title={info.label} description={info.blurb}>
@@ -37,22 +38,103 @@ const posts = Astro.props.posts;
     </nav>
     <p class="eyebrow" lang="ja">{info.ja}</p>
     <h1 class="page-title">{info.label}</h1>
-    <p class="page-intro">{info.blurb}</p>
+    <div class="page-copy">
+      <p class="page-intro">{info.blurb}</p>
+      {info.intro?.map((paragraph) => <p>{paragraph}</p>)}
+    </div>
   </header>
   <div class="wrap">
     {
+      isGuides && (
+        <div class="filters" data-guide-filters>
+          <p id="guide-filter-label" class="filter-label">Guide type</p>
+          <div role="group" aria-labelledby="guide-filter-label">
+            <button type="button" data-guide-filter="all" aria-pressed="true">
+              All
+            </button>
+            {guideTypeIds.map((id) => (
+              <button type="button" data-guide-filter={id} aria-pressed="false">
+                {guideTypes[id]}
+              </button>
+            ))}
+          </div>
+          <p class="visually-hidden" role="status" data-guide-status />
+        </div>
+      )
+    }
+    {
       posts.length > 0 ? (
-        <ul class="cards">
+        <ul class="cards" data-guide-list>
           {posts.map((post) => (
             <PostCard post={post} level={2} />
           ))}
         </ul>
       ) : (
-        <div class="empty">
+        <div class="empty" data-guide-generic-empty>
           <h2>Nothing filed here yet</h2>
           <p>Published {info.label.toLowerCase()} notes will show up in this list.</p>
         </div>
       )
     }
+    {
+      isGuides && (
+        <div class="empty" data-guide-empty hidden>
+          <p class="empty-title">No guides of this type yet</p>
+          <p>Published notes of this type will show up in this list.</p>
+        </div>
+      )
+    }
   </div>
 </BaseLayout>
+
+<script>
+  const root = document.querySelector('[data-guide-filters]');
+  if (root) {
+    const buttons = Array.from(root.querySelectorAll<HTMLButtonElement>('[data-guide-filter]'));
+    const items = Array.from(document.querySelectorAll<HTMLElement>('[data-guide-list] > li'));
+    const empty = document.querySelector<HTMLElement>('[data-guide-empty]');
+    const generic = document.querySelector<HTMLElement>('[data-guide-generic-empty]');
+    const status = document.querySelector<HTMLElement>('[data-guide-status]');
+    const valid = new Set(buttons.map((button) => button.getAttribute('data-guide-filter')));
+
+    function apply(type: string | null, updateUrl: boolean) {
+      const active = type && valid.has(type) ? type : 'all';
+      for (const button of buttons) {
+        button.setAttribute('aria-pressed', button.getAttribute('data-guide-filter') === active ? 'true' : 'false');
+      }
+      let shown = 0;
+      for (const item of items) {
+        const match = active === 'all' || item.getAttribute('data-guide-type') === active;
+        item.hidden = !match;
+        if (match) shown += 1;
+      }
+      const filtering = active !== 'all';
+      if (empty) empty.hidden = !(filtering && shown === 0);
+      if (generic) generic.hidden = filtering || items.length > 0;
+      if (status) {
+        const label =
+          buttons.find((button) => button.getAttribute('data-guide-filter') === active)?.textContent?.trim() ??
+          'All';
+        status.textContent =
+          shown === 0 ? `No guides for ${label}.` : `${shown} ${shown === 1 ? 'guide' : 'guides'} for ${label}.`;
+      }
+      if (updateUrl) {
+        const next = new URL(window.location.href);
+        if (active === 'all') next.searchParams.delete('type');
+        else next.searchParams.set('type', active);
+        history.replaceState(null, '', next);
+      }
+    }
+
+    root.addEventListener('click', (event) => {
+      const target = event.target;
+      if (!(target instanceof Element)) return;
+      const button = target.closest<HTMLButtonElement>('[data-guide-filter]');
+      if (!button || !root.contains(button)) return;
+      apply(button.getAttribute('data-guide-filter'), true);
+    });
+
+    const initial = new URL(window.location.href).searchParams.get('type');
+    apply(initial, false);
+  }
+</script>

@@ -16,6 +16,7 @@ const required = [
   'dist/category/bars/index.html',
   'dist/category/concafes/index.html',
   'dist/category/izakaya/index.html',
+  'dist/category/hostess-clubs/index.html',
   'dist/category/guides/index.html',
   'dist/404.html',
   'dist/robots.txt',
@@ -71,15 +72,24 @@ if (leaks.length > 0) {
 const home = readFileSync('dist/index.html', 'utf8');
 const search = readFileSync('dist/search/index.html', 'utf8');
 const robots = readFileSync('dist/robots.txt', 'utf8');
+const hostess = readFileSync('dist/category/hostess-clubs/index.html', 'utf8');
+const guides = readFileSync('dist/category/guides/index.html', 'utf8');
 
 const expectations = [
   [home.includes('https://inaminayo-bot.github.io/tokyo-after-dark/'), 'home canonical URL'],
   [home.includes('/tokyo-after-dark/'), 'home base path'],
   [home.includes('The lights are coming on'), 'empty-state copy'],
+  [home.includes('Kyabakura'), 'home category label'],
   [search.includes('pagefind-input'), 'search box'],
   [search.includes('/tokyo-after-dark/pagefind/'), 'Pagefind base path'],
   [search.includes('base-url="/tokyo-after-dark/"'), 'Pagefind base URL'],
+  [search.includes('Kyabakura'), 'search category link'],
   [robots.includes('sitemap'), 'robots sitemap line'],
+  [hostess.includes('nomination fee'), 'hostess pricing intro'],
+  [hostess.includes('set time'), 'hostess set-time explanation'],
+  [guides.includes('data-guide-filter="etiquette"'), 'guide type filter'],
+  [guides.includes('data-guide-filter="scams-safety"'), 'guide type scams filter'],
+  [guides.includes('data-guide-filter="date-night"'), 'guide type date-night filter'],
 ];
 
 const failed = expectations.filter(([ok]) => !ok).map(([, label]) => label);

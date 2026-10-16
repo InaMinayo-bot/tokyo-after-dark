@@ -1,6 +1,6 @@
 # Tokyo After Dark
 
-English reviews and practical notes for Tokyo nightlife: clubs, bars, concept cafes (コンカフェ), izakaya, and short guides.
+English reviews and practical notes for Tokyo nightlife: clubs, bars, concept cafes (コンカフェ), izakaya, kyabakura and hostess clubs (キャバクラ), and short guides.
 
 The live site will be [https://inaminayo-bot.github.io/tokyo-after-dark/](https://inaminayo-bot.github.io/tokyo-after-dark/).
 
@@ -54,7 +54,8 @@ The production build leaves out anything with `draft: true`.
 | `date` | `2026-10-13` |
 | `draft` | `true` hides it on the live site. `false` publishes it. |
 | `featured` | `true` puts it in the featured row. Otherwise `false`. |
-| `category` | One of `clubs`, `bars`, `concafes`, `izakaya`, `guides`. |
+| `category` | One of `clubs`, `bars`, `concafes`, `izakaya`, `hostess-clubs`, `guides`. |
+| `guideType` | Guides only. One of `area`, `first-timers`, `budget`, `etiquette`, `scams-safety`, `themed-nights`, `seasonal`, `late-night-food`, `last-train`, `lgbtq`, `solo`, `date-night`. Leave it out for a venue review. |
 | `area` | Neighborhood, such as Shibuya, Shinjuku, Roppongi, Ginza, Akihabara, or Ikebukuro. Required for venues. Optional for a citywide guide. New names get their own page. |
 | `venue` | Optional. The place name, when the headline is not already the name. |
 | `rating` | A whole number from 1 to 5. Required for venues. Leave it out for guides. |
@@ -74,7 +75,7 @@ Category, area, and tag pages are created from these fields. You do not add thos
 ## What is already on the site
 
 - Home, with a featured row and the latest posts
-- Category, area, and tag pages
+- Category, area, and tag pages, with guide-type filters on the guides page
 - About, contact, privacy, and affiliate disclosure
 - Search (Pagefind, built with the site, runs in the browser)
 - RSS at `/rss.xml`

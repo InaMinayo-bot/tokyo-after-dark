@@ -1,7 +1,7 @@
 import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
-import { categoryIds, priceRanges } from './data/taxonomy';
+import { categoryIds, guideTypeIds, priceRanges } from './data/taxonomy';
 
 const foreignerFriendly = z
   .object({
@@ -38,6 +38,7 @@ const posts = defineCollection({
       draft: z.boolean().default(false),
       featured: z.boolean().default(false),
       category: z.enum(categoryIds),
+      guideType: z.enum(guideTypeIds).optional(),
       area: z.string().min(1).optional(),
       venue: z.string().min(1).optional(),
       rating: z.coerce.number().int().min(1).max(5).optional(),
@@ -53,6 +54,14 @@ const posts = defineCollection({
       foreignerFriendly,
     })
     .superRefine((data, ctx) => {
+      if (data.guideType && data.category !== 'guides') {
+        ctx.addIssue({
+          code: 'custom',
+          message: 'guideType is only for posts in the guides category.',
+          path: ['guideType'],
+        });
+      }
+
       if (data.category !== 'guides') {
         if (data.rating == null) {
           ctx.addIssue({

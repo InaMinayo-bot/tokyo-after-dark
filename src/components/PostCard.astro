@@ -1,6 +1,6 @@
 ---
 import type { Post } from '../lib/posts';
-import { categories } from '../data/taxonomy';
+import { categories, guideTypes } from '../data/taxonomy';
 import { formatDate, isoDate, url } from '../lib/paths';
 import Price from './Price.astro';
 import Rating from './Rating.astro';
@@ -18,7 +18,7 @@ const cover = data.cover ? url(data.cover) : undefined;
 const headingId = `card-title-${post.id}`;
 ---
 
-<li class="card">
+<li class="card" data-guide-type={data.guideType}>
   <div class="cover">
     {
       cover ? (
@@ -34,6 +34,7 @@ const headingId = `card-title-${post.id}`;
     <p class="kicker">
       {data.draft && <span class="pill">Sample draft</span>}
       <span>{category.label}</span>
+      {data.guideType && <span>{guideTypes[data.guideType]}</span>}
       {data.area && <span>{data.area}</span>}
     </p>
     {
