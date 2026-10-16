@@ -3,6 +3,7 @@ import { render } from 'astro:content';
 import AdSlot from '../components/AdSlot.astro';
 import FactSheet from '../components/FactSheet.astro';
 import KitsCallout from '../components/KitsCallout.astro';
+import PremiumCallout from '../components/PremiumCallout.astro';
 import JsonLd from '../components/JsonLd.astro';
 import NewsletterSignup from '../components/NewsletterSignup.astro';
 import PostCard from '../components/PostCard.astro';
@@ -11,7 +12,7 @@ import Rating from '../components/Rating.astro';
 import { categories, guideTypes } from '../data/taxonomy';
 import { absoluteUrl, formatDate, isoDate, slugify, socialImage, url } from '../lib/paths';
 import { getPosts, relatedPosts, type Post } from '../lib/posts';
-import { splitAroundKitsCallout } from '../data/kits';
+import { splitCallouts } from '../lib/callouts';
 import { postJsonLd } from '../lib/schema';
 import BaseLayout from './BaseLayout.astro';
 
@@ -29,7 +30,7 @@ const schema = postJsonLd(post, pageUrl, image);
 const posts = await getPosts();
 const related = relatedPosts(posts, post);
 const cover = data.cover ? url(data.cover) : undefined;
-const kitsSplit = post.rendered?.html ? splitAroundKitsCallout(post.rendered.html) : null;
+const calloutParts = post.rendered?.html ? splitCallouts(post.rendered.html) : null;
 ---
 
 <BaseLayout
@@ -120,12 +121,16 @@ const kitsSplit = post.rendered?.html ? splitAroundKitsCallout(post.rendered.htm
       <div class="post-body">
         <div class="prose">
           {
-            kitsSplit ? (
-              <>
-                <Fragment set:html={kitsSplit.before} />
-                <KitsCallout />
-                <Fragment set:html={kitsSplit.after} />
-              </>
+            calloutParts ? (
+              calloutParts.map((part) =>
+                part.type === 'html' ? (
+                  <Fragment set:html={part.html} />
+                ) : part.type === 'kits' ? (
+                  <KitsCallout />
+                ) : (
+                  <PremiumCallout />
+                ),
+              )
             ) : (
               <Content />
             )

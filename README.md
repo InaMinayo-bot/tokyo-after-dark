@@ -92,6 +92,7 @@ Nothing below is switched on.
 - **Ads.** Paste the ad snippet into `src/components/AdSlot.astro`, inside the `<aside>`. Then set the repository variable `PUBLIC_ADS_ENABLED` to `true` (Settings → Secrets and variables → Actions → Variables). The next deploy shows a labeled ad slot on the home page and on posts. Until then, the slot is not in the page.
 - **Affiliate or booking links.** Add `affiliate` on a post. The button is marked as a sponsored link and points at the disclosure page.
 - **Gumroad kits.** `src/data/kits.ts` holds the Job Hunting, Apartment Hunting, Visa Paperwork, and $29 bundle URLs. They are TODO placeholders, so the “Living in Japan? Get the kits” callout is left out of every page. Replace each URL with the published Gumroad link, with no `TODO` in it, and the callout appears wherever a post includes `<!-- kits-callout -->`.
+- **Premium membership.** `src/data/premium.ts` holds the Fantia or Pixiv Fanbox name and URL. The URL is a TODO placeholder, so the Premium (18+) link and the members callout are left out of every page. Replace it with the published `https` URL, with no `TODO` in it. The link then shows in the nav and footer. A post can include `<!-- premium-callout -->`. The kyabakura category page already has the callout slot.
 - **Newsletter.** The form is visible and does not save addresses. When you have a provider, replace `src/components/NewsletterSignup.astro` with their form.
 - **Contact email.** The address `hello@example.com` is a placeholder. Change `email` in `src/data/site.ts` before you share the site.
 

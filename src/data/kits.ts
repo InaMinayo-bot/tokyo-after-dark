@@ -22,8 +22,6 @@ export const gumroadKits = {
   },
 } as const;
 
-const kitsMarker = /<!--\s*kits-callout\s*-->/;
-
 export function gumroadKitsAreLive(
   kits: Record<string, { url: string }> = gumroadKits,
 ): boolean {
@@ -37,13 +35,4 @@ export function gumroadKitsAreLive(
       return false;
     }
   });
-}
-
-export function splitAroundKitsCallout(html: string): { before: string; after: string } | null {
-  const match = kitsMarker.exec(html);
-  if (!match || match.index == null) return null;
-  return {
-    before: html.slice(0, match.index),
-    after: html.slice(match.index + match[0].length),
-  };
 }
