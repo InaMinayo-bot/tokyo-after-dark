@@ -97,6 +97,8 @@ The Metropolitan Police describe two versions. On the street, someone — someti
 - If someone claiming to be police asks for money, hang up or walk to a koban. Show your passport to an actual officer when asked.
 - Save 110, #9110, and 050-3816-2787 in your phone before you need them.
 
+<!-- kits-callout -->
+
 ## Sources
 
 Last checked: 14 October 2026. Pages change. If a number or a boundary in this note matters to you, open the official page before you rely on it.
