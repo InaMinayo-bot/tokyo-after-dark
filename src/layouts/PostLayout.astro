@@ -27,6 +27,7 @@ const schema = postJsonLd(post, pageUrl, image);
 const posts = await getPosts();
 const related = relatedPosts(posts, post);
 const cover = data.cover ? url(data.cover) : undefined;
+const hasFacts = Boolean(data.foreignerFriendly || data.address || data.hours || data.maps || data.affiliate);
 ---
 
 <BaseLayout
@@ -103,17 +104,21 @@ const cover = data.cover ? url(data.cover) : undefined;
       )
     }
 
-    <div class="post-grid wrap">
-      <div class="post-facts">
-        <FactSheet
-          notes={data.foreignerFriendly}
-          address={data.address}
-          hours={data.hours}
-          maps={data.maps}
-          affiliate={data.affiliate}
-          affiliateLabel={data.affiliateLabel}
-        />
-      </div>
+    <div class:list={['post-grid', 'wrap', hasFacts && 'has-facts']}>
+      {
+        hasFacts && (
+          <div class="post-facts">
+            <FactSheet
+              notes={data.foreignerFriendly}
+              address={data.address}
+              hours={data.hours}
+              maps={data.maps}
+              affiliate={data.affiliate}
+              affiliateLabel={data.affiliateLabel}
+            />
+          </div>
+        )
+      }
       <div class="post-body">
         <div class="prose">
           <Content />
