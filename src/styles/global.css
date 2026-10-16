@@ -204,6 +204,11 @@ h3,
   text-underline-offset: 0.2em;
 }
 
+.nav-list a.premium-link,
+.site-footer a.premium-link {
+  color: var(--muted);
+}
+
 .nav-list a[aria-current="page"] {
   background: var(--ink);
   color: var(--bg);
@@ -740,6 +745,57 @@ button,
 
 .prose img {
   border-radius: 0.9rem;
+}
+
+.kits-callout {
+  margin-top: 2rem;
+  padding: 1rem 1.05rem 1.1rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(20, 18, 27, 0.72);
+}
+
+.kits-callout h2,
+.prose .kits-callout h2 {
+  margin: 0 0 0.75rem;
+  font-size: 1.35rem;
+  line-height: 1.15;
+}
+
+.kits-callout ul {
+  display: grid;
+  gap: 0.35rem;
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+.kits-callout a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+
+.premium-callout {
+  margin-top: 1.25rem;
+  max-width: 40rem;
+  color: var(--muted);
+  font-size: 0.98rem;
+}
+
+.prose .premium-callout {
+  margin-top: 1.5rem;
+}
+
+.premium-callout a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+
+.premium-note {
+  margin-top: 0.2rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
 }
 
 .page-title {
