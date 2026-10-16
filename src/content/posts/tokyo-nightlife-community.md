@@ -24,3 +24,5 @@ guideType: solo
 ## Who to talk to
 
 <!-- Who is worth introducing yourself to, and how do people actually start a conversation? -->
+
+<!-- kits-callout -->

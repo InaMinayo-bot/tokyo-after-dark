@@ -1,0 +1,26 @@
+---
+import { gumroadKits, gumroadKitsAreLive } from '../data/kits';
+
+const live = gumroadKitsAreLive();
+const kits = Object.values(gumroadKits);
+---
+
+{
+  live && (
+    <aside class="kits-callout" aria-labelledby="kits-callout-title" data-pagefind-ignore="all">
+      <h2 id="kits-callout-title">Living in Japan? Get the kits</h2>
+      <ul>
+        {
+          kits.map((kit) => (
+            <li>
+              <a href={kit.url} rel="noopener noreferrer" target="_blank">
+                {kit.label}
+                <span class="visually-hidden"> (opens in a new tab)</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </aside>
+  )
+}

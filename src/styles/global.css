@@ -742,6 +742,34 @@ button,
   border-radius: 0.9rem;
 }
 
+.kits-callout {
+  margin-top: 2rem;
+  padding: 1rem 1.05rem 1.1rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(20, 18, 27, 0.72);
+}
+
+.kits-callout h2,
+.prose .kits-callout h2 {
+  margin: 0 0 0.75rem;
+  font-size: 1.35rem;
+  line-height: 1.15;
+}
+
+.kits-callout ul {
+  display: grid;
+  gap: 0.35rem;
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+.kits-callout a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+
 .page-title {
   max-width: 16ch;
 }
