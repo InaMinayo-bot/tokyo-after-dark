@@ -685,6 +685,7 @@ button,
 
 .prose {
   max-width: 68ch;
+  overflow-wrap: anywhere;
 }
 
 .prose > * + * {
@@ -718,6 +719,7 @@ button,
 
 .prose a {
   text-underline-offset: 0.16em;
+  overflow-wrap: anywhere;
 }
 
 .prose blockquote {
