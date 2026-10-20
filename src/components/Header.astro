@@ -1,4 +1,5 @@
 ---
+import PremiumLink from './PremiumLink.astro';
 import { categories, categoryIds } from '../data/taxonomy';
 import { site } from '../data/site';
 import { currentPath, url } from '../lib/paths';
@@ -42,6 +43,7 @@ function isCurrent(linkPath: string) {
             </li>
           ))
         }
+        <PremiumLink />
       </ul>
     </div>
   </nav>
