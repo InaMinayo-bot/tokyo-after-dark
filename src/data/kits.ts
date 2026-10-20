@@ -1,24 +1,28 @@
 /**
  * Gumroad URLs for the Living in Japan kits.
- * TODO: replace every url with the published product page.
- * The callout stays off the site while any url still contains TODO.
+ * The callout is shown wherever a post includes the kits marker.
+ * It stays off the site if any url is not https or still contains TODO.
  */
 export const gumroadKits = {
   jobHunting: {
     label: 'Job Hunting in Japan kit',
-    url: 'https://gumroad.com/l/TODO-job-hunting-in-japan',
+    url: 'https://jacksonite18.gumroad.com/l/yammi',
   },
   apartmentHunting: {
     label: 'Apartment Hunting kit',
-    url: 'https://gumroad.com/l/TODO-apartment-hunting-in-japan',
+    url: 'https://jacksonite18.gumroad.com/l/suyavf',
   },
   visaPaperwork: {
     label: 'Visa Paperwork kit',
-    url: 'https://gumroad.com/l/TODO-visa-paperwork-in-japan',
+    url: 'https://jacksonite18.gumroad.com/l/hxjfkv',
   },
   bundle: {
     label: 'Bundle ($29)',
-    url: 'https://gumroad.com/l/TODO-living-in-japan-bundle',
+    url: 'https://jacksonite18.gumroad.com/l/okntue',
+  },
+  freeSample: {
+    label: 'Free sample',
+    url: 'https://jacksonite18.gumroad.com/l/otybj',
   },
 } as const;
 
