@@ -54,13 +54,14 @@ The production build leaves out anything with `draft: true`.
 | `date` | `2026-10-13` |
 | `draft` | `true` hides it on the live site. `false` publishes it. |
 | `featured` | `true` puts it in the featured row. Otherwise `false`. |
+| `pinned` | `true` shows it as a Start here card at the top of its own category page, including while it is still a draft in local dev. Otherwise `false`. |
 | `category` | One of `clubs`, `bars`, `concafes`, `izakaya`, `hostess-clubs`, `guides`. |
-| `guideType` | Guides only. One of `area`, `first-timers`, `budget`, `etiquette`, `scams-safety`, `themed-nights`, `seasonal`, `late-night-food`, `last-train`, `lgbtq`, `solo`, `date-night`. Leave it out for a venue review. |
-| `area` | Neighborhood, such as Shibuya, Shinjuku, Roppongi, Ginza, Akihabara, or Ikebukuro. Required for venues. Optional for a citywide guide. New names get their own page. |
+| `guideType` | One of `area`, `first-timers`, `budget`, `etiquette`, `scams-safety`, `themed-nights`, `seasonal`, `late-night-food`, `last-train`, `lgbtq`, `solo`, `date-night`. Set it on an explainer so the post also appears on the guides page. Leave it out for a venue review. |
+| `area` | Neighborhood, such as Shibuya, Shinjuku, Roppongi, Ginza, Akihabara, or Ikebukuro. Required for venue reviews. Optional for an explainer. New names get their own page. |
 | `venue` | Optional. The place name, when the headline is not already the name. |
-| `rating` | A whole number from 1 to 5. Required for venues. Leave it out for guides. |
-| `price` | `"¥"`, `"¥¥"`, `"¥¥¥"`, or `"¥¥¥¥"`. Keep the quotes. Required for venues. |
-| `address` | Street address. Required for venues. |
+| `rating` | A whole number from 1 to 5. Required for venue reviews. Leave it out for an explainer. |
+| `price` | `"¥"`, `"¥¥"`, `"¥¥¥"`, or `"¥¥¥¥"`. Keep the quotes. Required for venue reviews. |
+| `address` | Street address. Required for venue reviews. |
 | `maps` | The venue’s Google Maps link. Optional, but worth adding. |
 | `hours` | When it is open, in your own words. |
 | `cover` | Path such as `/images/covers/photo.jpg`. |
@@ -75,7 +76,7 @@ Category, area, and tag pages are created from these fields. You do not add thos
 ## What is already on the site
 
 - Home, with a featured row and the latest posts
-- Category, area, and tag pages, with guide-type filters on the guides page
+- Category, area, and tag pages, with guide-type filters on the guides page. An explainer with `guideType` set is listed there even when its category is something else. A `pinned` post is a Start here card on its own category page.
 - About, contact, privacy, and affiliate disclosure
 - Search (Pagefind, built with the site, runs in the browser)
 - RSS at `/rss.xml`
