@@ -59,9 +59,9 @@ The production build leaves out anything with `draft: true`.
 | `guideType` | One of `area`, `first-timers`, `budget`, `etiquette`, `scams-safety`, `themed-nights`, `seasonal`, `late-night-food`, `last-train`, `lgbtq`, `solo`, `date-night`. Set it on an explainer so the post also appears on the guides page. Leave it out for a venue review. |
 | `area` | Neighborhood, such as Shibuya, Shinjuku, Roppongi, Ginza, Akihabara, or Ikebukuro. Required for venue reviews. Optional for an explainer. New names get their own page. |
 | `venue` | Optional. The place name, when the headline is not already the name. |
-| `rating` | A whole number from 1 to 5. Required for venue reviews. Leave it out for an explainer. |
-| `price` | `"¥"`, `"¥¥"`, `"¥¥¥"`, or `"¥¥¥¥"`. Keep the quotes. Required for venue reviews. |
-| `address` | Street address. Required for venue reviews. |
+| `rating` | A whole number from 1 to 5. Required before a venue review is published. A draft can leave it out. Leave it out for an explainer. |
+| `price` | `"¥"`, `"¥¥"`, `"¥¥¥"`, or `"¥¥¥¥"`. Keep the quotes. Required before a venue review is published. A draft can leave it out. Leave it out for an explainer. |
+| `address` | Street address. Required before a venue review is published. A draft can leave it out. Leave it out for an explainer. |
 | `maps` | The venue’s Google Maps link. Optional, but worth adding. |
 | `hours` | When it is open, in your own words. |
 | `cover` | Path such as `/images/covers/photo.jpg`. |
@@ -88,10 +88,12 @@ Two sample posts live in `src/content/posts/`. They are labeled SAMPLE and set t
 
 ## Later, if you want to make money
 
-Nothing below is switched on.
+Ads, affiliate links, the premium membership, the newsletter, and the contact address are still placeholders. The Gumroad kit links are live.
 
 - **Ads.** Paste the ad snippet into `src/components/AdSlot.astro`, inside the `<aside>`. Then set the repository variable `PUBLIC_ADS_ENABLED` to `true` (Settings → Secrets and variables → Actions → Variables). The next deploy shows a labeled ad slot on the home page and on posts. Until then, the slot is not in the page.
 - **Affiliate or booking links.** Add `affiliate` on a post. The button is marked as a sponsored link and points at the disclosure page.
+- **Gumroad kits.** `src/data/kits.ts` holds the live links for the Job Hunting, Apartment Hunting, and Visa Paperwork kits, the $29 bundle, and a free sample. The “Living in Japan? Get the kits” callout appears wherever a post includes `<!-- kits-callout -->`. That marker is on the community draft and the nightlife scams draft, so the public build leaves the callout out until one of those posts is published.
+- **Premium membership.** `src/data/premium.ts` holds the Fantia or Pixiv Fanbox name and URL. The URL is a TODO placeholder, so the Premium (18+) link and the members callout are left out of every page. Replace it with the published `https` URL, with no `TODO` in it. The link then shows in the nav and footer. A post can include `<!-- premium-callout -->`. The kyabakura category page already has the callout slot.
 - **Newsletter.** The form is visible and does not save addresses. When you have a provider, replace `src/components/NewsletterSignup.astro` with their form.
 - **Contact email.** The address `hello@example.com` is a placeholder. Change `email` in `src/data/site.ts` before you share the site.
 
