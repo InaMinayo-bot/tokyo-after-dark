@@ -7,20 +7,23 @@ title: "Name the night in a few words"
 description: "One or two sentences. This shows on the homepage, in search, and when the link is shared."
 date: 2026-10-13
 featured: false
+# Optional. true pins a Start here card on this post's own category page.
+# pinned: false
 # clubs, bars, concafes, izakaya, hostess-clubs, or guides
 category: bars
-# Guides only. Delete this line for a venue review.
+# Optional. Also lists the post on the guides page. Leave it out for a venue review.
+# A post with guideType does not need a rating, area, price, or address.
 # One of: area, first-timers, budget, etiquette, scams-safety, themed-nights, seasonal, late-night-food, last-train, lgbtq, solo, date-night
 # guideType: etiquette
-# Neighborhood. Required for venues. Optional for a citywide guide.
+# Neighborhood. Required for venue reviews. Optional for an explainer.
 area: Shibuya
 # Optional. Use this when the headline is not the venue's name.
 venue: "Example Bar (replace this)"
-# Whole number from 1 to 5. Required before you publish a venue. A draft can leave it out. Leave it out for guides.
+# Whole number from 1 to 5. Required before you publish a venue. A draft can leave it out. Leave it out for an explainer.
 rating: 4
-# ¥  ¥¥  ¥¥¥  or ¥¥¥¥. Required before you publish a venue. A draft can leave it out. Keep the quotes.
+# ¥  ¥¥  ¥¥¥  or ¥¥¥¥. Required before you publish a venue. A draft can leave it out. Keep the quotes. Leave it out for an explainer.
 price: "¥¥"
-# Street address. Required before you publish a venue. A draft can leave it out.
+# Street address. Required before you publish a venue. A draft can leave it out. Leave it out for an explainer.
 address: "1-2-3 Example, Shibuya-ku, Tokyo"
 maps: "https://www.google.com/maps/search/?api=1&query=Tokyo"
 hours: "Wed–Sun 19:00–02:00"

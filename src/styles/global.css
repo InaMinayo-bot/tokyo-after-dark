@@ -647,6 +647,15 @@ button,
   gap: 1.5rem;
 }
 
+.post-body,
+.prose {
+  min-width: 0;
+}
+
+.start-here {
+  margin-bottom: 1.75rem;
+}
+
 .facts {
   align-content: start;
 }
@@ -681,6 +690,7 @@ button,
 
 .prose {
   max-width: 68ch;
+  overflow-wrap: anywhere;
 }
 
 .prose > * + * {
@@ -714,6 +724,7 @@ button,
 
 .prose a {
   text-underline-offset: 0.16em;
+  overflow-wrap: anywhere;
 }
 
 .prose blockquote {
@@ -745,6 +756,39 @@ button,
 
 .prose img {
   border-radius: 0.9rem;
+}
+
+.table-scroll {
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+.prose table {
+  width: max-content;
+  min-width: 100%;
+  border-collapse: collapse;
+  font-size: 0.98rem;
+  line-height: 1.45;
+}
+
+.prose caption {
+  text-align: left;
+}
+
+.prose th,
+.prose td {
+  text-align: left;
+  vertical-align: top;
+  padding: 0.55rem 0.75rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.prose th {
+  color: var(--pink);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .kits-callout {
@@ -957,7 +1001,7 @@ textarea {
     grid-template-columns: repeat(3, 1fr);
   }
 
-  .post-grid {
+  .post-grid.has-facts {
     grid-template-columns: minmax(0, 1fr) 18.5rem;
     align-items: start;
   }

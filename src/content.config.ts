@@ -37,6 +37,7 @@ const posts = defineCollection({
       updated: z.coerce.date().optional(),
       draft: z.boolean().default(false),
       featured: z.boolean().default(false),
+      pinned: z.boolean().default(false),
       category: z.enum(categoryIds),
       guideType: z.enum(guideTypeIds).optional(),
       area: z.string().min(1).optional(),
@@ -54,15 +55,11 @@ const posts = defineCollection({
       foreignerFriendly,
     })
     .superRefine((data, ctx) => {
-      if (data.guideType && data.category !== 'guides') {
-        ctx.addIssue({
-          code: 'custom',
-          message: 'guideType is only for posts in the guides category.',
-          path: ['guideType'],
-        });
-      }
+      // A guideType marks an explainer. It can sit in any category and also
+      // appear on the guides page. Venue reviews leave guideType unset.
+      const explainer = data.category === 'guides' || data.guideType != null;
 
-      if (data.category !== 'guides') {
+      if (!explainer) {
         if (!data.area) {
           ctx.addIssue({
             code: 'custom',
