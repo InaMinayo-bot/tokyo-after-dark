@@ -1,0 +1,19 @@
+---
+import { premiumMembership, premiumMembershipIsLive } from '../data/premium';
+
+const live = premiumMembershipIsLive();
+---
+
+{
+  live && (
+    <aside class="premium-callout" aria-label="Premium membership, 18 plus" data-pagefind-ignore="all">
+      <p>
+        <a href={premiumMembership.url} rel="nofollow noopener noreferrer" target="_blank">
+          Want the uncensored, 18+ deep dives? Members-only reviews on {premiumMembership.platform}.
+          <span class="visually-hidden"> (opens in a new tab)</span>
+        </a>
+      </p>
+      <p class="premium-note">18+. Adults only.</p>
+    </aside>
+  )
+}

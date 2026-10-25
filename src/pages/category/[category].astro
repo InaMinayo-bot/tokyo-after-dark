@@ -1,5 +1,6 @@
 ---
 import PostCard from '../../components/PostCard.astro';
+import PremiumCallout from '../../components/PremiumCallout.astro';
 import { categories, categoryIds, guideTypeIds, guideTypes, isCategory } from '../../data/taxonomy';
 import { url } from '../../lib/paths';
 import { getPosts } from '../../lib/posts';
@@ -41,6 +42,7 @@ const isGuides = category === 'guides';
     <div class="page-copy">
       <p class="page-intro">{info.blurb}</p>
       {info.intro?.map((paragraph) => <p>{paragraph}</p>)}
+      {category === 'hostess-clubs' && <PremiumCallout />}
     </div>
   </header>
   <div class="wrap">

@@ -1,0 +1,16 @@
+---
+import { premiumMembership, premiumMembershipIsLive } from '../data/premium';
+
+const live = premiumMembershipIsLive();
+---
+
+{
+  live && (
+    <li>
+      <a class="premium-link" href={premiumMembership.url} rel="nofollow noopener noreferrer" target="_blank">
+        Premium (18+)
+        <span class="visually-hidden"> (opens in a new tab)</span>
+      </a>
+    </li>
+  )
+}

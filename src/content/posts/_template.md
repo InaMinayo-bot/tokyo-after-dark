@@ -16,10 +16,11 @@ category: bars
 area: Shibuya
 # Optional. Use this when the headline is not the venue's name.
 venue: "Example Bar (replace this)"
-# Whole number from 1 to 5. Required for venues. Leave it out for guides.
+# Whole number from 1 to 5. Required before you publish a venue. A draft can leave it out. Leave it out for guides.
 rating: 4
-# ¥  ¥¥  ¥¥¥  or ¥¥¥¥. Required for venues. Keep the quotes.
+# ¥  ¥¥  ¥¥¥  or ¥¥¥¥. Required before you publish a venue. A draft can leave it out. Keep the quotes.
 price: "¥¥"
+# Street address. Required before you publish a venue. A draft can leave it out.
 address: "1-2-3 Example, Shibuya-ku, Tokyo"
 maps: "https://www.google.com/maps/search/?api=1&query=Tokyo"
 hours: "Wed–Sun 19:00–02:00"
